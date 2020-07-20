@@ -11,11 +11,14 @@ vec2 flip_y(vec2 vec)
 
 const float pi = 3.14159265359;
 const float pi_2 = pi * 2.0;
+const vec3 red = vec3(1.0, 0, 0);
 
 
-float plot(vec2 st, float pct, float half_width)
+float plot(vec2 uv, float calculated_y, float line_width)
 {
-	return smoothstep(pct - half_width, pct, st.y) - smoothstep(pct, pct + half_width, st.y);
+	float half_line_width = line_width / 2.0;
+	return smoothstep(calculated_y - half_line_width, calculated_y, uv.y) 
+			- smoothstep(calculated_y, calculated_y + half_line_width, uv.y);
 }
 
 //void fragment()
@@ -36,10 +39,10 @@ float plot(vec2 st, float pct, float half_width)
 
 void fragment()
 {	
-	vec2 st = flip_y(UV.xy);
-	float x = st.x;
+	vec2 uv = flip_y(UV.xy);
+	float x = uv.x;
 
-	float y = sin(st.x * 2.0 * pi_2) / 2.0 + 0.5;
+	float y = sin(uv.x * 2.0 * pi_2) / 2.0 + 0.5;
 	//float y = step(0.8, st.x);	
 	//float y = smoothstep(0.2,0.5,st.x) - smoothstep(0.5,0.8,st.x);
 	
@@ -53,11 +56,12 @@ void fragment()
 	//y = min(0.0,x);   // return the lesser of x and 0.0
 	//y = max(0.0,x);   // return the greater of x and 0.0 
 	
-	// Gradient
-	vec3 color = vec3(y);
+	// Gradient based on y
+	vec3 background = vec3(y);
 	
-	float pct = plot(st, y, 0.02);
-	color = (1.0 - pct) * color + pct * vec3(0.0, 1.0, 0.0);
+	float point_intensity = plot(uv, y, 0.005);
+	vec3 point_color = point_intensity * red;
+	vec3 color = background + point_color;
 	
 	COLOR = vec4(color, 1.0);
 }

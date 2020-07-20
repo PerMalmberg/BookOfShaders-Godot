@@ -1,13 +1,65 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://05/05.shader" type="Shader" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://03/TextureRect.gd" type="Script" id=3]
+[ext_resource path="res://05/curves.jpg" type="Texture" id=4]
+[ext_resource path="res://05/shaders/row1/curve_01.shader" type="Shader" id=5]
+[ext_resource path="res://05/shaders/row1/curve_00.shader" type="Shader" id=6]
+[ext_resource path="res://05/ShaderCurve.tscn" type="PackedScene" id=7]
+[ext_resource path="res://05/shaders/row1/curve_02.shader" type="Shader" id=8]
+[ext_resource path="res://05/shaders/row1/curve_03.shader" type="Shader" id=9]
+[ext_resource path="res://05/shaders/row1/curve_04.shader" type="Shader" id=10]
+[ext_resource path="res://05/shaders/row1/curve_05.shader" type="Shader" id=11]
+[ext_resource path="res://05/shaders/row2/curve_00.shader" type="Shader" id=12]
+[ext_resource path="res://05/shaders/row3/curve_00.shader" type="Shader" id=13]
+[ext_resource path="res://05/shaders/row4/curve_00.shader" type="Shader" id=14]
+[ext_resource path="res://05/shaders/row5/curve_00.shader" type="Shader" id=15]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
 shader_param/dimension = Vector2( 100, 100 )
 shader_param/mouse = Vector2( 100, 100 )
+
+[sub_resource type="ShaderMaterial" id=2]
+resource_local_to_scene = true
+shader = ExtResource( 6 )
+
+[sub_resource type="ShaderMaterial" id=3]
+resource_local_to_scene = true
+shader = ExtResource( 5 )
+
+[sub_resource type="ShaderMaterial" id=4]
+resource_local_to_scene = true
+shader = ExtResource( 8 )
+
+[sub_resource type="ShaderMaterial" id=5]
+resource_local_to_scene = true
+shader = ExtResource( 9 )
+
+[sub_resource type="ShaderMaterial" id=6]
+resource_local_to_scene = true
+shader = ExtResource( 10 )
+
+[sub_resource type="ShaderMaterial" id=7]
+resource_local_to_scene = true
+shader = ExtResource( 11 )
+
+[sub_resource type="ShaderMaterial" id=8]
+resource_local_to_scene = true
+shader = ExtResource( 12 )
+
+[sub_resource type="ShaderMaterial" id=9]
+resource_local_to_scene = true
+shader = ExtResource( 13 )
+
+[sub_resource type="ShaderMaterial" id=10]
+resource_local_to_scene = true
+shader = ExtResource( 14 )
+
+[sub_resource type="ShaderMaterial" id=11]
+resource_local_to_scene = true
+shader = ExtResource( 15 )
 
 [node name="Node2D" type="Node2D"]
 
@@ -31,3 +83,87 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="curves" type="Sprite" parent="TextureRect"]
+position = Vector2( 880, 1272 )
+texture = ExtResource( 4 )
+
+[node name="Row 1" type="Node" parent="."]
+
+[node name="00" parent="Row 1" instance=ExtResource( 7 )]
+material = SubResource( 2 )
+margin_left = 128.0
+margin_top = 704.0
+margin_right = 256.0
+margin_bottom = 768.0
+
+[node name="01" parent="Row 1" instance=ExtResource( 7 )]
+material = SubResource( 3 )
+margin_left = 384.0
+margin_top = 704.0
+margin_right = 504.0
+margin_bottom = 768.0
+
+[node name="02" parent="Row 1" instance=ExtResource( 7 )]
+material = SubResource( 4 )
+margin_left = 576.0
+margin_top = 704.0
+margin_right = 704.0
+margin_bottom = 768.0
+
+[node name="03" parent="Row 1" instance=ExtResource( 7 )]
+material = SubResource( 5 )
+margin_left = 792.0
+margin_top = 704.0
+margin_right = 920.0
+margin_bottom = 768.0
+
+[node name="04" parent="Row 1" instance=ExtResource( 7 )]
+material = SubResource( 6 )
+margin_left = 1024.0
+margin_top = 704.0
+margin_right = 1152.0
+margin_bottom = 768.0
+
+[node name="05" parent="Row 1" instance=ExtResource( 7 )]
+material = SubResource( 7 )
+margin_left = 1224.0
+margin_top = 704.0
+margin_right = 1352.0
+margin_bottom = 768.0
+
+[node name="Row 2" type="Node" parent="."]
+
+[node name="00" parent="Row 2" instance=ExtResource( 7 )]
+material = SubResource( 8 )
+margin_left = -64.0
+margin_top = 1072.0
+margin_right = 64.0
+margin_bottom = 1136.0
+
+[node name="Row 3" type="Node" parent="."]
+
+[node name="00" parent="Row 3" instance=ExtResource( 7 )]
+material = SubResource( 9 )
+margin_left = -64.0
+margin_top = 1256.0
+margin_right = 64.0
+margin_bottom = 1320.0
+
+[node name="Row 4" type="Node" parent="."]
+
+[node name="00" parent="Row 4" instance=ExtResource( 7 )]
+material = SubResource( 10 )
+margin_left = -64.0
+margin_top = 1432.0
+margin_right = 64.0
+margin_bottom = 1496.0
+
+[node name="Row 5" type="Node" parent="."]
+
+[node name="00" parent="Row 5" instance=ExtResource( 7 )]
+material = SubResource( 11 )
+margin_left = -64.0
+margin_top = 1616.0
+margin_right = 64.0
+margin_bottom = 1680.0
