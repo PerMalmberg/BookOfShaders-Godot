@@ -1,0 +1,51 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://06/06.shader" type="Shader" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://03/TextureRect.gd" type="Script" id=3]
+[ext_resource path="res://06/06_2.shader" type="Shader" id=4]
+[ext_resource path="res://06/WilliamTurner.shader" type="Shader" id=5]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/mouse = Vector2( 100, 100 )
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 4 )
+shader_param/mouse = Vector2( 0, 0 )
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 5 )
+shader_param/mouse = Vector2( 0, 0 )
+
+[node name="Node2D" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource( 1 )
+margin_right = 1024.0
+margin_bottom = 600.0
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 1
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource( 2 )
+margin_top = 640.0
+margin_right = 1024.0
+margin_bottom = 1240.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WilliamTurner" type="ColorRect" parent="."]
+material = SubResource( 3 )
+margin_top = 1280.0
+margin_right = 1024.0
+margin_bottom = 1880.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
