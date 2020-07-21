@@ -31,8 +31,8 @@ shader = ExtResource( 7 )
 
 [node name="TextureRect" type="TextureRect" parent="."]
 material = SubResource( 1 )
-margin_right = 1024.0
-margin_bottom = 600.0
+margin_right = 760.0
+margin_bottom = 392.0
 texture = ExtResource( 2 )
 expand = true
 stretch_mode = 1
@@ -43,37 +43,39 @@ __meta__ = {
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource( 2 )
-margin_left = 1048.0
-margin_right = 2072.0
-margin_bottom = 600.0
+margin_left = 792.0
+margin_top = 8.0
+margin_right = 1528.0
+margin_bottom = 400.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="WilliamTurner" type="ColorRect" parent="."]
 material = SubResource( 3 )
-margin_top = 640.0
-margin_right = 1024.0
-margin_bottom = 1240.0
+margin_top = 416.0
+margin_right = 712.0
+margin_bottom = 768.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Flag" type="ColorRect" parent="."]
 material = SubResource( 4 )
-margin_left = 1056.0
-margin_top = 640.0
-margin_right = 2072.0
-margin_bottom = 1240.0
+margin_left = 776.0
+margin_top = 432.0
+margin_right = 1392.0
+margin_bottom = 744.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Hue" type="ColorRect" parent="."]
 material = SubResource( 5 )
-margin_top = 1264.0
-margin_right = 600.0
-margin_bottom = 1864.0
+margin_left = 48.0
+margin_top = 800.0
+margin_right = 616.0
+margin_bottom = 1376.0
 color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false

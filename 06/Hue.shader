@@ -14,7 +14,12 @@ vec2 flip_y(in vec2 vec)
 //  https://www.shadertoy.com/view/MsS3Wc
 vec3 hsb2rgb(in vec3 hsb)
 {
-	vec3 rgb = clamp(abs(mod(hsb.x * 6.0 + vec3(0.0, 4.0, 2.0), 6.0) - 3.0) - 1.0, 0.0, 1.0);
+	vec3 rgb = clamp(
+					abs(
+						mod(hsb.x * 6.0 + vec3(0.0, 4.0, 2.0), 6.0) - 3.0
+						) - 1.0,
+						0.0, 1.0);
+						
 	rgb = rgb * rgb * (3.0 - 2.0 * rgb);
 	return hsb.z * mix( vec3(1.0), rgb, hsb.y);
 }
@@ -30,11 +35,18 @@ vec2 rotate(in vec2 original_point, in vec2 pivot, in float angle_radians)
 	return vec2(x, y) + pivot;
 }
 
+// https://easings.net/#easeInOutQuint
+float ease_in_sine(float hue_gradient)
+{
+	float x = hue_gradient;
+	return 1.0 - cos((x * pi) / 2.0);
+}
+
 void fragment()
 {	
 	vec2 uv = flip_y(UV);	
 	
-	uv = rotate(uv, center, TIME);
+	//uv = rotate(uv, center, TIME);
 	
 	// Use polar coordinates instead of cartesian
     vec2 to_center = center - uv;
@@ -43,7 +55,9 @@ void fragment()
 
     // Map the angle (-PI to PI) to the Hue (from 0 to 1)
     // and the Saturation to the radius
-    vec3 color = hsb2rgb(vec3(angle / pi_2 + 0.5, radius * 2.0, 1.0));
+	float hue = angle / pi_2 + 0.5;
+	
+	vec3 color = hsb2rgb(vec3(ease_in_sine(hue), radius * 2.0, 1.0));
 	
 	// Make it a circle
 	float alpha = radius <= 0.5 ? 1.0 : 0.0;

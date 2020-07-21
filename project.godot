@@ -19,6 +19,11 @@ config/name="BookOfShaders"
 run/main_scene="res://06/06.tscn"
 config/icon="res://icon.png"
 
+[display]
+
+window/size/width=2048
+window/size/height=1440
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"
