@@ -22,6 +22,16 @@ float plot(vec2 uv, float calculated_y, float line_width)
 			- smoothstep(calculated_y, calculated_y + half_line_width, uv.y);
 }
 
+float ease_in_out_quint(float x)
+{
+	return x < 0.5 ? 16.0 * x * x * x * x * x : 1.0 - pow(-2.0 * x + 2.0, 5.0) / 2.0;
+}
+
+float ease_out_quad(float x)
+{
+	return 1.0 - (1.0 - x) * (1.0 - x);
+}
+
 void fragment()
 {	
 	vec2 uv = flip_y(UV);
@@ -43,5 +53,13 @@ void fragment()
 	vec2 reflection_path = vec2(uv.x, 0.06);
 	color = mix(color, sunset_orange * uv.x + 0.2, plot(uv, reflection_path.y, 0.6));
 
+	// Sunset/sunrise
+	//color *= max(0.2, ease_out_quad(sin(TIME)));
+	
+	// Rainbow
+	color = mix(color, vec3(1.0, 0, 0), plot(uv, abs(sin(uv.x * pi)), 0.3));
+	color = mix(color, vec3(0.0, 0.6, 0), plot(uv, abs(sin(uv.x * pi)) - 0.05, 0.3));
+	color = mix(color, vec3(0.0, 0.0, .6), plot(uv, abs(sin(uv.x * pi)) - 0.1, 0.3));
+		
 	COLOR = vec4(color, 1.0);
 }
