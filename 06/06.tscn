@@ -72,8 +72,9 @@ __meta__ = {
 [node name="Hue" type="ColorRect" parent="."]
 material = SubResource( 5 )
 margin_top = 1264.0
-margin_right = 1024.0
+margin_right = 600.0
 margin_bottom = 1864.0
+color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
