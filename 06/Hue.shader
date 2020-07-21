@@ -18,11 +18,23 @@ vec3 hsb2rgb(in vec3 hsb)
 	return hsb.z * mix( vec3(1.0), rgb, hsb.y);
 }
 
+vec2 rotate(in vec2 original_point, in vec2 pivot, in float angle_radians)
+{
+	float cos_angle = cos(angle_radians);
+	float sin_angle = sin(angle_radians);
+	
+	original_point -= pivot;
+	original_point.x = original_point.x * cos_angle - original_point.y * sin_angle;
+	original_point.y = original_point.x * sin_angle + original_point.y * cos_angle;
+	original_point += pivot;
+	return original_point;
+}
+
 void fragment()
 {	
 	vec2 uv = flip_y(UV);
-	
-	vec3 color = vec3(0.0);
+		
+	uv = rotate(uv, vec2(0.5), TIME);
 	
 	// Use polar coordinates instead of cartesian
     vec2 to_center = vec2(0.5) - uv;
@@ -31,7 +43,9 @@ void fragment()
 
     // Map the angle (-PI to PI) to the Hue (from 0 to 1)
     // and the Saturation to the radius
-    color = hsb2rgb(vec3((angle/pi_2)+0.5,radius,1.0));
+	
+	angle = angle / pi_2 + 0.5;
+    vec3 color = hsb2rgb(vec3(angle, radius, 1.0));
 
     COLOR = vec4(color,1.0);
 }
