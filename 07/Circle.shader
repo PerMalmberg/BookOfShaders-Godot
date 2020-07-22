@@ -55,7 +55,7 @@ void fragment()
 	float scaled_time = sin(TIME) / 2.0 + 0.5;
 
 	// Larger than 0.5 radius and capped gradient amount prevents the hard outline
-	vec4 color = alpha_blend(transparent, yellow * circle(uv, vec2(0.7), 0.3, min(0.2, scaled_time)));
+	vec4 color = alpha_blend(transparent, yellow * circle(uv, vec2(0.7), 0.3, min(0.25, scaled_time)));
 	color = alpha_blend(color, blue * circle(uv, vec2(0.3), 0.4, min(0.4, scaled_time)));
 	color = alpha_blend(color, red * circle(uv, vec2(0.5), 0.6, min(0.5, scaled_time)));
 	
