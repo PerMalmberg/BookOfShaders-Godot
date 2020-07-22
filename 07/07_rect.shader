@@ -11,6 +11,7 @@ const vec3 blue = vec3(0, 0, 1.0);
 const vec3 white = vec3(1.0);
 const vec3 black = vec3(0.0);
 const vec3 biege = vec3(247.0/255.0, 240.0/255.0, 220.0/255.0);
+const vec3 yellow = vec3(247.0/255.0, 207.0/255.0, 0);
 
 vec2 flip_y(vec2 vec)
 {
@@ -75,15 +76,29 @@ void fragment()
 	vec3 intensity = rect(uv, vec2(0.0, 0.65), vec2(0.25, 1.0), gradient_amount);
 	color = mix(color, red, intensity);
 		
+	intensity = rect(uv, vec2(0.95, 0.65), vec2(1.0+line_width, 1.0), gradient_amount);
+	color = mix(color, yellow, intensity);
+	
+	intensity = rect(uv, vec2(0.75, 0.0), vec2(1.0+line_width, 0.1), gradient_amount);
+	color = mix(color, blue, intensity);
+	
 	intensity = rect_outline(uv, vec2(-line_width, 0.85), vec2(1.1, 1.0 + line_width), line_width, gradient_amount);
 	color = mix(color, black, intensity);
-	
+		
 	intensity = rect_outline(uv, vec2(-line_width, 0.65), vec2(1.1, 1.0 + line_width), line_width, gradient_amount);
 	color = mix(color, black, intensity);
 	
-	intensity = rect_outline(uv, vec2(-line_width, -line_width), vec2(0.25, 1.0 + line_width), line_width, gradient_amount);
+	intensity = rect_outline(uv, vec2(0.25-line_width/2.0, 0), vec2(0.25+line_width/2.0, 1.0 + line_width), line_width, gradient_amount);
+	color = mix(color, black, intensity);	
+	
+	intensity = rect_outline(uv, vec2(0.75-line_width/2.0, 0), vec2(0.75+line_width/2.0, 1.0 + line_width), line_width, gradient_amount);
 	color = mix(color, black, intensity);
 	
+	intensity = rect_outline(uv, vec2(0.95-line_width/2.0, 0), vec2(0.95+line_width/2.0, 1.0 + line_width), line_width, gradient_amount);
+	color = mix(color, black, intensity);
+	
+	intensity = rect_outline(uv, vec2(0.25, 0.1 - line_width / 2.0), vec2(1.0, 0.1 + line_width / 2.0), line_width, gradient_amount);
+	color = mix(color, black, intensity);
 
     COLOR = vec4(color,1.0);	
 }
