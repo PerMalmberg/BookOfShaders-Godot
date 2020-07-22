@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://07/07_rect.shader" type="Shader" id=1]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/mouse = Vector2( 0, 0 )
+shader_param/dimension = Vector2( 1024, 600 )
+
+[node name="Node2D" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource( 1 )
+margin_left = 8.0
+margin_right = 608.0
+margin_bottom = 600.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
