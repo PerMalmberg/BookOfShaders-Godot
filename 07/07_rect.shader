@@ -46,24 +46,19 @@ vec3 rect_impl(vec2 coord, in vec2 lower_left_corner, in vec2 upper_right_corner
 }
 
 // margins: x: left, y: upper, z: right, w: lower
-vec3 rect_margin(vec2 coord, in vec4 corners, float gradient_amount)
+vec3 rect(vec2 coord, in vec2 lower_left_corner, in vec2 upper_right_corner, float gradient_amount)
 {
-	return rect_impl(coord, vec2(corners.x, corners.w), vec2(corners.z, corners.y), gradient_amount);
+	return rect_impl(coord, lower_left_corner, upper_right_corner, gradient_amount);
 }
 
 vec3 rect_outline(vec2 coord, vec2 lower_left_corner, vec2 upper_right_corner, float width, float gradient_amount)
 {
-	// Draw two triagles, one inside the other to create an outline.
-	vec3 outer = rect_margin(coord, vec4(lower_left_corner.x,
-											 upper_right_corner.y,
-											 upper_right_corner.x,
-											 lower_left_corner.y),
+	// Draw two recatangles, one inside the other to create an outline.
+	vec3 outer = rect(coord, lower_left_corner, upper_right_corner,
 											 gradient_amount);
 				
-	vec3 inner = rect_margin(coord, vec4(lower_left_corner.x + width,
-											 upper_right_corner.y - width,
-											 upper_right_corner.x - width,
-											 lower_left_corner.y + width),
+	vec3 inner = rect(coord, vec2(lower_left_corner.x + width, lower_left_corner.y + width),
+							 vec2(upper_right_corner.x - width, upper_right_corner.y - width),
 											 gradient_amount);
 											
 	return outer - inner;
@@ -77,9 +72,16 @@ void fragment()
 	float gradient_amount = 0.002;
 	float line_width = 0.02;
 		
-	vec3 intensity = rect_outline(uv, vec2(-line_width, 0.85), vec2(1.1, 1.0 + line_width), line_width, gradient_amount);
+	vec3 intensity = rect(uv, vec2(0.0, 0.65), vec2(0.25, 1.0), gradient_amount);
+	color = mix(color, red, intensity);
+		
+	intensity = rect_outline(uv, vec2(-line_width, 0.85), vec2(1.1, 1.0 + line_width), line_width, gradient_amount);
 	color = mix(color, black, intensity);
+	
 	intensity = rect_outline(uv, vec2(-line_width, 0.65), vec2(1.1, 1.0 + line_width), line_width, gradient_amount);
+	color = mix(color, black, intensity);
+	
+	intensity = rect_outline(uv, vec2(-line_width, -line_width), vec2(0.25, 1.0 + line_width), line_width, gradient_amount);
 	color = mix(color, black, intensity);
 	
 
