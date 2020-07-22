@@ -33,7 +33,7 @@ vec3 rect_impl(vec2 coord, in vec2 lower_left_corner, in vec2 upper_right_corner
 			&& coord.y <= upper_right_corner.y)
 		{
 			lower_left = vec2(1.0) - smoothstep(vec2(gradient_amount), vec2(0.0), coord - lower_left_corner);
-			upper_right = vec2(1.0) - smoothstep(vec2(gradient_amount), vec2(0.0), 1.0 - coord);
+			upper_right = vec2(1.0) - smoothstep(vec2(gradient_amount), vec2(0.0), upper_right_corner - coord);
 		}
 	}
 	else
@@ -60,13 +60,13 @@ vec3 rect_outline(vec2 coord, vec2 lower_left_corner, vec2 upper_right_corner, f
 											 lower_left_corner.y),
 											 gradient_amount);
 				
-//	vec3 inner = rect_margin(coord, vec4(lower_left_corner.x + width,
-//											 upper_right_corner.y - width,
-//											 upper_right_corner.x - width,
-//											 lower_left_corner.y + width),
-//											 gradient_amount);
+	vec3 inner = rect_margin(coord, vec4(lower_left_corner.x + width,
+											 upper_right_corner.y - width,
+											 upper_right_corner.x - width,
+											 lower_left_corner.y + width),
+											 gradient_amount);
 											
-	return outer;// - inner;
+	return outer - inner;
 }
 
 void fragment()
@@ -74,7 +74,7 @@ void fragment()
 	vec2 uv = flip_y(UV);
     
 	vec3 color = biege;
-	float gradient_amount = 0.008;// 0.008;
+	float gradient_amount = 0.002;
 	float width = 0.02;
 		
 	vec3 intensity = rect_outline(uv, vec2(0.01, 0.8), vec2(0.99, 0.99), width, gradient_amount);
