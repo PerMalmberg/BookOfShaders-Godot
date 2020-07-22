@@ -75,12 +75,13 @@ void fragment()
     
 	vec3 color = biege;
 	float gradient_amount = 0.002;
-	float width = 0.02;
+	float line_width = 0.02;
 		
-	vec3 intensity = rect_outline(uv, vec2(0.01, 0.8), vec2(0.99, 0.99), width, gradient_amount);
+	vec3 intensity = rect_outline(uv, vec2(-line_width, 0.85), vec2(1.1, 1.0 + line_width), line_width, gradient_amount);
 	color = mix(color, black, intensity);
-	//intensity = rect_outline(uv, vec2(0.07, 0.8), vec2(0.2, 1.0), width, gradient_amount);
-	//color = mix(color, black, intensity);
+	intensity = rect_outline(uv, vec2(-line_width, 0.65), vec2(1.1, 1.0 + line_width), line_width, gradient_amount);
+	color = mix(color, black, intensity);
+	
 
     COLOR = vec4(color,1.0);	
 }
