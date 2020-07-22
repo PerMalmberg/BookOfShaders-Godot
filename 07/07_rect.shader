@@ -10,6 +10,7 @@ const vec3 red = vec3(1.0, 0, 0);
 const vec3 blue = vec3(0, 0, 1.0);
 const vec3 white = vec3(1.0);
 const vec3 black = vec3(0.0);
+const vec3 biege = vec3(247.0/255.0, 240.0/255.0, 220.0/255.0);
 
 vec2 flip_y(vec2 vec)
 {
@@ -17,15 +18,23 @@ vec2 flip_y(vec2 vec)
 	return vec;
 }
 
+// gradient_amount is generally very small; it is also in rage 0...1 of the enture UV-range.
 vec3 rect_impl(vec2 coord, in vec2 lower_left_margin, in vec2 upper_right_margin, float gradient_amount)
 {
-	vec2 lower_left;
-	vec2 upper_right;
+	vec2 lower_left = vec2(0);
+	vec2 upper_right = vec2(0);
 	
 	if (gradient_amount > 0.0)
 	{
-		lower_left = smoothstep(vec2(lower_left_margin / 2.0 - gradient_amount), lower_left_margin / 2.0 + gradient_amount, coord);
-		upper_right = smoothstep(vec2(upper_right_margin / 2.0 - gradient_amount), upper_right_margin / 2.0 + gradient_amount, 1.0 - coord);
+		// Only do gradient if we're inside the desired area
+		if (coord.x >= lower_left_margin.x
+		    && coord.y > lower_left_margin.y
+		    && coord.x <= 1.0 - upper_right_margin.x
+			&& coord.y <= 1.0 - upper_right_margin.y)
+		{
+			lower_left = smoothstep(vec2(0), vec2(gradient_amount), coord - lower_left_margin);
+        	upper_right = smoothstep(vec2(0), vec2(gradient_amount), 1.0 - coord - upper_right_margin);
+		}
 	}
 	else
 	{
@@ -64,9 +73,14 @@ void fragment()
 {	
 	vec2 uv = flip_y(UV);
     
-	//vec3 intensity = rect_margin(uv, vec4(0.05, 0.2, 0.3, 0.5), false);
-	vec3 intensity = rect_outline(uv, vec2(0.1, 0.1), vec2(0.9, 0.9), 0.3, 0.03);
-	vec3 color = mix(black, white, intensity);
+	vec3 color = biege;
+	float gradient_amount = 0.0;// 0.008;
+	float width = 0.02;
+		
+	vec3 intensity = rect_outline(uv, vec2(-0.1, 0.8), vec2(1.0, 1.0), width, gradient_amount);
+	color = mix(color, black, intensity);
+	intensity = rect_outline(uv, vec2(0.07, 0.8), vec2(0.2, 1.0), width, gradient_amount);
+	color = mix(color, black, intensity);
 
     COLOR = vec4(color,1.0);	
 }
