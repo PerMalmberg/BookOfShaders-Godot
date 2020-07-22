@@ -12,6 +12,8 @@ const vec4 white = vec4(vec3(1.0), 1.0);
 const vec4 black = vec4(vec3(0.0), 1.0);
 const vec4 biege = vec4(vec3(247.0/255.0, 240.0/255.0, 220.0/255.0), 1.0);
 const vec4 yellow = vec4(vec3(247.0/255.0, 207.0/255.0, 0), 1.0);
+const vec4 transparent = vec4(0);
+
 
 vec2 flip_y(vec2 vec)
 {
@@ -52,10 +54,8 @@ void fragment()
     
 	float scaled_time = sin(TIME) / 2.0 + 0.5;
 
-	vec4 color;
-	
 	// Larger than 0.5 radius and capped gradient amount prevents the hard outline
-	color = alpha_blend(color, yellow * circle(uv, vec2(0.7), 0.3, min(0.2, scaled_time)));
+	vec4 color = alpha_blend(transparent, yellow * circle(uv, vec2(0.7), 0.3, min(0.2, scaled_time)));
 	color = alpha_blend(color, blue * circle(uv, vec2(0.3), 0.4, min(0.4, scaled_time)));
 	color = alpha_blend(color, red * circle(uv, vec2(0.5), 0.6, min(0.5, scaled_time)));
 	
