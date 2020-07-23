@@ -75,6 +75,21 @@ float f5(float a)
 	return smoothstep(-0.5, 1.0, cos(a * 10.0)) * 0.2 + 0.5;
 }
 
+float f6(float a)
+{
+	return (f2(a) + f4(a)) / 1.5;
+}
+
+float f7(float a)
+{
+	return (f4(a) + f5(a)) / 1.5;
+}
+
+float f8(float a)
+{
+	return (f6(a) - f4(a)) / 1.5;
+}
+
 float call(float value, int func)
 {
 	if(func == 1)
@@ -97,6 +112,18 @@ float call(float value, int func)
 	{
 		return f5(value);
 	}
+	else if(func == 6)
+	{
+		return f6(value);
+	}
+	else if(func == 7)
+	{
+		return f7(value);
+	}
+	else if(func == 8)
+	{
+		return f8(value);
+	}
 	
 	return 0.0;
 }
@@ -107,7 +134,7 @@ void fragment()
     vec3 color = vec3(0.0);
 		
 	// Select shape function here
-	int func = 2;
+	int func = 8;
 	bool outline_only = false;
 	
 	if (show_curve)
