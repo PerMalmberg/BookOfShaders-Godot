@@ -50,10 +50,13 @@ void scale_axes(inout vec2 uv, in float x_max, in float y_max)
 	uv.y = uv.y * y_max * 2.0 - y_max;
 }
 
-vec3 geometry(vec2 uv, vec2 pos, int corner_count)
-{
+vec3 geometry(vec2 uv, vec2 pos, float angle, int corner_count)
+{	
+	uv -= pos;
+	uv = rotate(uv, vec2(0), angle);
+	
 	// Angle and radius from the current pixel
-	float a = atan(uv.x,uv.y) + pi;
+	float a = atan(uv.x, uv.y) + pi;
 	float r = pi_2 / float(corner_count);
 
 	// Shaping function that modulate the distance
@@ -66,12 +69,14 @@ vec3 geometry(vec2 uv, vec2 pos, int corner_count)
 void fragment()
 {
 	vec2 uv = flip_y(UV);
-    
 	scale_axes(uv, 1.0, 1.0);
+    	
+	vec4 color = yellow * vec4(geometry(uv, vec2(0.0), sin(TIME), 3), 0.5);
+	vec4 color2 = red * vec4(geometry(uv, vec2(0.5), sin(TIME), 5), 0.5);
+	vec4 color3 = biege * vec4(geometry(uv, vec2(-0.5), sin(TIME), 5), 0.5);
 
-	vec3 color = geometry(uv, vec2(0.5), 3);
-
-	COLOR = vec4(color, 1.0);
+	color = alpha_blend(color, color2);
+	COLOR = alpha_blend(color, color3);
 }
 
 //void fragment()
