@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://07/07_rect.shader" type="Shader" id=1]
 [ext_resource path="res://07/Circle.shader" type="Shader" id=2]
+[ext_resource path="res://07/DistanceFields.shader" type="Shader" id=3]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
@@ -12,6 +13,14 @@ shader_param/dimension = Vector2( 1024, 600 )
 shader = ExtResource( 2 )
 shader_param/mouse = Vector2( 0, 0 )
 shader_param/dimension = Vector2( 1024, 600 )
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 3 )
+shader_param/show_curve = false
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 3 )
+shader_param/show_curve = true
 
 [node name="Node2D" type="Node2D"]
 
@@ -28,6 +37,25 @@ material = SubResource( 2 )
 margin_left = 616.0
 margin_right = 1216.0
 margin_bottom = 600.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect3" type="ColorRect" parent="."]
+material = SubResource( 3 )
+margin_top = 640.0
+margin_right = 600.0
+margin_bottom = 1240.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect4" type="ColorRect" parent="."]
+material = SubResource( 4 )
+margin_left = 640.0
+margin_top = 640.0
+margin_right = 1240.0
+margin_bottom = 1240.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
