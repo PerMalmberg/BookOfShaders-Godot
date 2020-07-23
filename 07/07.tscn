@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://07/07_rect.shader" type="Shader" id=1]
 [ext_resource path="res://07/Circle.shader" type="Shader" id=2]
 [ext_resource path="res://07/DistanceFields.shader" type="Shader" id=3]
+[ext_resource path="res://07/Geometric.shader" type="Shader" id=4]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
@@ -21,6 +22,10 @@ shader_param/show_curve = false
 [sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 3 )
 shader_param/show_curve = true
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = ExtResource( 4 )
+shader_param/show_curve = false
 
 [node name="Node2D" type="Node2D"]
 
@@ -56,6 +61,15 @@ margin_left = 640.0
 margin_top = 640.0
 margin_right = 1240.0
 margin_bottom = 1240.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect5" type="ColorRect" parent="."]
+material = SubResource( 5 )
+margin_top = 1272.0
+margin_right = 600.0
+margin_bottom = 1872.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
