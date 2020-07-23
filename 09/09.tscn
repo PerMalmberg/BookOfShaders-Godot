@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://09/RotatingSquares.shader" type="Shader" id=1]
+[ext_resource path="res://09/TicTacToe.shader" type="Shader" id=2]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 2 )
+shader_param/show_curve = false
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 1 )
+shader_param/show_curve = false
+
+[node name="Node2D" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource( 1 )
+margin_right = 504.0
+margin_bottom = 432.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+material = SubResource( 2 )
+margin_left = 528.0
+margin_right = 1040.0
+margin_bottom = 424.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
